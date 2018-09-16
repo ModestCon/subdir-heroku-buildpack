@@ -7,7 +7,6 @@ ENV_DIR=${3:-}
 
 if [ -f $ENV_DIR/BACKEND_PATH ]; then
 	BACKEND_PATH=`cat $ENV_DIR/BACKEND_PATH`
-  FRONTEND_PATH=`cat $ENV_DIR/FRONTEND_PATH`
 	if [ -d $BUILD_DIR/$BACKEND_PATH ]; then
 		echo "-----> Subdir buildpack in $PROJECT_PATH"
 		echo "       creating cache: $CACHE_DIR"
@@ -16,8 +15,6 @@ if [ -f $ENV_DIR/BACKEND_PATH ]; then
 		echo "       created tmp dir: $TMP_DIR"
 		echo "       moving working dir: $PROJECT_PATH to $TMP_DIR"
 		cp -R $BUILD_DIR/$BACKEND_PATH/. $TMP_DIR/
-    echo "       copying frontend into $BACKEND_PATH/client/"
-    cp -R $BUILD_DIR/$FRONTEND_PATH/. $TMP_DIR/client/
 	 	echo "       cleaning build dir $BUILD_DIR"
 		rm -rf $BUILD_DIR
 		echo "       recreating $BUILD_DIR"
